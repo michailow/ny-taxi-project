@@ -3,10 +3,11 @@
  Using NYC data for yellow cabbin taxi done analysis and ML project.<br>
  On given data was built API to provide result.
  
-# 
+# Project structure
+Data analysis, preparation and modeling presented in `/notebooks/NY_taxi_analysis.ipynb`
  
 # Start the API
-To start the app launc command "docker compose up"</br>
+To start the app launc command `docker compose up`</br>
 After that we have 3 endpoint:
 1. Get avegare time at certain day time:<br>
 `time/<string:hour>`<br>
