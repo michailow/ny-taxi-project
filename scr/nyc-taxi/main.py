@@ -15,18 +15,18 @@ def createApp():
     def init():
         upload_data(engine)
 
+    @app.route("/time/<string:hour>", methods=["GET"])
+    def getPerContry(hour):
+        value = getStatistiksForHour(hour, engine)
+        return prepareOutput(hour, value)
+
     @app.route("/week/<string:day>", methods=["GET"])
     def getTotal(day):
         value = getStatistiksForDay(day, engine)
         return prepareOutput(day, value)
 
-    @app.route("/time/<string:hour>", methods=["GET"])
-    def getPerContry(hour):
-        value = getStatistiksForDay(hour, engine)
-        return prepareOutput(hour, value)
-
-    @app.route("/calculate/<tripDistance>/<string:day>/<string:hour>/<string:minute>", methods=["GET"])
-    def calculateTime(tripDistance, day, hour, minute, engine):
+    @app.route("/calculate/<int:tripDistance>/<string:day>/<int:hour>/<string:minute>", methods=["GET"])
+    def calculateTime(tripDistance, day, hour, minute):
         return calculate(tripDistance, day, hour, minute, engine)
 
     return app

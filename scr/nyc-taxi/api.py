@@ -59,8 +59,8 @@ def getStatistiksForDay(day: str, engine) -> int:
     Return:
         result: integer
     """
-    day = mapWeekDay(day)
-    statement = f"select avg_speed_h from dataday where pickup_weekday = {day};"
+    dayNumber = mapDayNumber(day)
+    statement = f"select avg_speed_h from dataday where pickup_weekday = {dayNumber};"
     result = executeQuery(statement, engine)
     return result
     
@@ -79,7 +79,7 @@ def getStatistiksForHour(hour: int, engine) -> int:
     return result
 
 
-def mapWeekDay(day: str, hour: int = 0) -> int:
+def mapDayNumber(day: str) -> int:
     """
     Transforms day into day number
 
@@ -96,9 +96,8 @@ def mapWeekDay(day: str, hour: int = 0) -> int:
                "friday" : 4,
                "saturday" : 5,
                "sunday" : 6}
-    day = mapDict.get(day.lower())
-    weekHour = day * 24 + hour
-    return weekHour
+    dayNumber = mapDict.get(day.lower())
+    return dayNumber
 
 
 def getStatistiksForWeekHour(hour: int, day: str, engine) -> int:
@@ -110,9 +109,10 @@ def getStatistiksForWeekHour(hour: int, day: str, engine) -> int:
     Return:
         result: integer
     """
-    weekDay = mapWeekDay(day, hour)
+    dayNumber = mapDayNumber(day)
+    weekDay = dayNumber * 24 + hour
     statement = f"select avg_speed_h from dataweekhour where pickup_week_hour = '{weekDay}';"
-    result = executeQuery(statement)
+    result = executeQuery(statement, engine)
     return result
 
 
@@ -137,20 +137,13 @@ def calculate(tripDistance, day, hour, minute, engine):
     Return:
         result: integer
     """
-    mapDict = {"monday" : 0,
-               "tuesday" : 1,
-               "wednesday" : 2,
-               "thursday" : 3,
-               "friday" : 4,
-               "saturday" : 5,
-               "sunday" : 6}
-    day = mapDict.get(day.lower())
-    weekHour = day * 24 + hour
+    dayNumber = mapDayNumber(day)
+    weekHour = dayNumber * 24 + hour
     avgSpeedThisHour = getStatistiksForHour(hour, engine)
     avgSpeedThisDay = getStatistiksForDay(day, engine)
-    avgSpeedThisWeekHour= getStatistiksForWeekHour(weekHour, engine)
+    avgSpeedThisWeekHour= getStatistiksForWeekHour(hour, day, engine)
     featureDict = {'trip_distance' : [tripDistance],
-                   'pickup_weekday': [day],
+                   'pickup_weekday': [dayNumber],
                    'pickup_hour': [hour],
                    'pickup_minute' : [minute],
                    'pickup_week_hour' : [weekHour],
