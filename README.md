@@ -43,6 +43,5 @@ Example: `http://localhost:80/calculate/6/Monday/17/50`
 
 
 # TBD
-1. Reduce size of `pickle` model. Current object is about 500 MB.<br>
-2. Add dependency management like poetry.<br>
-3. Make data initiazilation during Docker building. Currently it Data uploading to DB as separate route.
+1. Add dependency management like poetry.<br>
+2. Make data initiazilation during Docker building. Currently it Data uploading to DB as separate route.
