@@ -10,7 +10,7 @@ import pyarrow
 
 def openFile(path):
     """
-    Opens CSV file
+    Opens Parquet file
 
     Args:
         path: path to data
