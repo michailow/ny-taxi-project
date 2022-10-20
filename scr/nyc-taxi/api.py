@@ -130,7 +130,7 @@ def getForest():
 
 def calculate(tripDistance, day, hour, minute, engine):
     """
-    Calculate time to travel 
+    Calculate time to travel unsig pretrained ML model
 
     Args:
         week: string
@@ -154,5 +154,5 @@ def calculate(tripDistance, day, hour, minute, engine):
     forest = getForest()
     time = forest.predict(df)
     time2 = time / 60
-    return {"ans" : time2}
+    return {"Estimated time" : time2}
     
