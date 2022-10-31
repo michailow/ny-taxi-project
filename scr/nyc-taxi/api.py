@@ -153,6 +153,6 @@ def calculate(tripDistance, day, hour, minute, engine):
     df = pd.DataFrame.from_dict(featureDict)
     forest = getForest()
     time = forest.predict(df)
-    time2 = time / 60
-    return {"Estimated time" : time2}
+    timeMin = time / 60
+    return {"Estimated time" : timeMin}
     
