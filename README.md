@@ -44,4 +44,4 @@ Example: `http://localhost:80/calculate/6/Monday/17/50`
 
 # TBD
 1. Add dependency management like poetry.<br>
-2. Make data initiazilation during Docker building. Currently it Data uploading to DB as separate route.
+2. Make data initiazilation during Docker building. Currently it uploading data to DB as separate route.
